@@ -10,6 +10,8 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .models import TextInference
 from .serializers import TextInferenceSerializer
+from .data_process import text_processing
+import datetime
 
 # Create your views here.
 def main(request):
@@ -35,10 +37,21 @@ def process_text(request):
             data = json.loads(request.body)
             text = data.get('text')
             # Perform your text processing logic here (e.g., summarization)
-            processed_text = f"{text.upper()}" # Example: Convert to uppercase
+            processed_text = text_processing(text) # Example: Convert to uppercase
+
+            print("Data: ", data, ' text: ', text)
+            print("Processed_test: ", processed_text)
+
+            format_data = {'originText':text, 'inferenceText':str(processed_text), 'task_type':'Normal'}
+            print("Format data: ", format_data)
 
             # Store inference and source to DB
-            serializer = TextInferenceSerializer()
+            serializer = TextInferenceSerializer(data=format_data)
+            if serializer.is_valid(raise_exception=True):
+                print("Input data valid! Deserialized to DB")
+                serializer.save()
+            else:
+                print("Input data serialization invalid!")
 
             return JsonResponse({'result': processed_text})
         except json.JSONDecodeError:
