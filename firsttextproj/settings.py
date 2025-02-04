@@ -85,7 +85,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'firsttext', # DB name in MySQL
-        'HOST' : '192.168.1.104',
+        'HOST' : '192.168.1.106',
         'PORT' : '3306',
         'USER' : 'admin',
         'PASSWORD' : 'laurence',
@@ -156,7 +156,7 @@ REST_FRAMEWORK = {
         'rest_framework.filters.OrderingFilter',
         'rest_framework.filters.SearchFilter',
      ],
-     'DEFAULT_PAGINATION_CLASSES':'rest_framework.pagination.PageNumberPagination',
+     'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination',
      'PAGE_SIZE': 2,
      'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',

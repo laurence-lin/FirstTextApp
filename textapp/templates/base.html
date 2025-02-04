@@ -1,16 +1,91 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Base Webpage</title>
-</head>
-<body>
-    <h1 style="text-align:center;">Welcome First Text APP</h1>
- 
-    <div style="display: flex; justify-content: center; align-items: center; height: 800px;">
-        <img src="{% static 'img/beach.avif' %}" width="600" height="800" style="object-fit: cover;">
+<!doctype html>
+<html  dir="ltr" lang="zh-TW">
+  <head >
+    <title>文本應用 APP - 文章摘要</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  </head>
+<body >
+
+<div class="tools-app__head" data-v-587ed573="">
+    <h1 class="tools-app__page-title" data-v-587ed573="">文章處理程式</h1>
+</div>
+
+<a href = "/textapp/base" class="text-switch-button">Basic Text process base page</a>
+<a href = "/textapp/textSummarize" class="text-switch-button">Text Summarization</a>
+<a href = "/textapp/textTranslate" class="text-switch-button">Text Translation</a>
+<a href = "/textapp/textKeywordExtract" class="text-switch-button">Get keyword from text</a>
+
+<h2>{% block task_title %}Basic Text Uppercase {% endblock %}</h2>
+
+<div class="text-main">
+    <div class="text-main-content">
+            <div class="content-region-top">
+                <div class="content-select_lang" >
+                    <select class="select_lang_toggle" id="select-language">
+                        <option value="" selected="selected" disabled="disabled" hidden="hidden">Select a language for text</option> 
+                        <option selected="selected" value="english">英文</option>
+                        <option value="traditional_chinese" >中文 (繁體)</option>
+                    </select> <!---->
+                </div> <!---->
+            </div> 
+            
+            <div class="input-row" >
+                    <div class="input-group" style="display: flex; align-items: center;">
+                        <label for="text-input-type-option" style="margin-right: 10px;">Text type:</label>
+                        <div class="wSelectContainer">
+                                <select class="wSelect__toggle" id="text-input-type-option">
+                                    <option value="" selected disabled hidden>選擇一個符合的選項</option>
+                                    <option value="general">Normal text</option>
+                                </select>
+                        
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="input-text-lower-limit">Output text size:</label>
+                        <input type="text" id="input-text-lower-limit" name="lower_limit" required minlength="1" maxlength="8" size="10" />
+                        <span>to</span>
+                        <input type="text" id="input-text-upper-limit" name="upper_limit" required minlength="1" maxlength="8" size="10" />
+                        <span>words</span>
+                    </div>
+            </div>
+            
+            <br class="ProseMirror-trailingBreak">
+            <div class="input-output-container">
+                <div class="input-text-editor">
+                    <div class="textEditor">
+                        <textarea id="text-box1" name="text-box1" placeholder="Please input some text..."></textarea>
+                    </div>
+                </div><div class="output-text-block"> <pre id="processed-text"></pre>
+                    <p id="processed-text-p"></p>
+                </div>
+            </div>
+    </div> 
+        
+    <div class="editor__word-counter" >
+        <div class="editor__word-counter-inner" >
+          0 /500 單字
+        </div>
     </div>
+</div> 
+<div class="summarizer__actions md-reverse" >
+    <button disabled  type="button" class="wBtn primary size--md" id="process-button"> Process text</button> 
+    <button type="button" class="wBtn default size--md" id="clear-button">clear</button> 
+</div>
+
+<div class="output-text-block" >
+    <div class="summarizer__result" >
+        <pre class="summarizer__result-text" ></pre>
+    </div> 
+    <div class="summarizer__actions align-right" >
+        <button type="button" class="wBtn default size--md"> 
+            Copy
+        </button>
+    </div>
+</div>
+
+{% block script %}
+<script src="{% static 'js/click_base_button.js' %}"></script>
+{% endblock %}
 </body>
 </html>

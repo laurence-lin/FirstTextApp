@@ -51,3 +51,21 @@
     overflow: auto;
     box-sizing: border-box;
 }
+
+/* In your CSS file or within <style> tags */
+.text-switch-button {
+    display: inline-block; /* Makes the link behave like a block element */
+    padding: 10px 20px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size */
+    text-decoration: none; /* Remove underline from link */
+    background-color: #4CAF50; /* Set background color */
+    color: white; /* Set text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Make cursor a pointer on hover */
+    transition: background-color 0.3s ease; /* Add a transition for hover effect */
+}
+
+.text-switch-button:hover {
+    background-color: #45a049; /* Darker background color on hover */
+}
