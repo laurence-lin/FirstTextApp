@@ -9,8 +9,12 @@ app_name = 'textapp'
 urlpatterns = [
     path('main/', views.main), # Argument: path address, view function (here is home function)
     path('base/', views.base),
+    path('textSummarize/', views.textSummarize),
+    path('textTranslate/', views.textTranslate),
+    path('textKeywordExtract/', views.textKeywordExtraction),
     path('sample/', views.sample),
     path('processText/', views.process_text),
+    path('processTextSummarize/', views.nlp_text_summarize),
 ]
 
 
