@@ -12,6 +12,8 @@ WORKDIR /app
 # Install dependencies
 RUN /usr/local/bin/python -m pip install --no-cache-dir -r requirements.txt
 
+ENV DJANGO_SETTINGS_MODULE firsttextproj.settings
+
 # Run migrations (important!)
 RUN /usr/local/bin/python manage.py makemigrations
 RUN /usr/local/bin/python manage.py migrate

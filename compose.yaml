@@ -1,5 +1,4 @@
-version: "3.9"
-
+version: "3"
 services:
   django_app:
     build: .  # Build from the current directory (where Dockerfile is)
@@ -14,7 +13,15 @@ services:
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=laurence
       - MYSQL_DATABASE=firsttext
+    networks:
+      - textapp_network
     restart: always
+    healthcheck: # Do health check to make sure MySQL is up
+      test: ["CMD-SHELL", "mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -e 'SELECT 1;'"] # Use env vars
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s # Allow time for initialisation
 
   db:
       image: mysql
@@ -24,4 +31,8 @@ services:
         - ./sql_scripts/init.sql:/docker-entrypoint-initdb.d/init.sql # Mount the init script, execute init.sql when container first starts
       ports:
         - "3306:3306"
+      networks:
+        - textapp_network
 
+networks:  # Define the network here!
+  textapp_network:
