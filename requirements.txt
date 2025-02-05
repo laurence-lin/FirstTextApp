@@ -1,0 +1,11 @@
+django
+transformers
+torch
+torchvision 
+torchaudio
+sentencepiece
+mysqlclient
+djangorestframework
+djangorestframework-xml
+djoser
+django-filter

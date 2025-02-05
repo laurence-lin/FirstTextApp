@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  django_app:
+    build: .  # Build from the current directory (where Dockerfile is)
+    ports:
+      - "8000:8000"  # Map host port 8000 to container port 8000
+    volumes:
+      - .:/app # Persistent all files in current directory
+    depends_on:
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=laurence
+      - MYSQL_DATABASE=firsttext
+    restart: always
+
+  db:
+      image: mysql
+      environment: 
+        MYSQL_ROOT_PASSWORD: root123
+      volumes:
+        - ./sql_scripts/init.sql:/docker-entrypoint-initdb.d/init.sql # Mount the init script, execute init.sql when container first starts
+      ports:
+        - "3306:3306"
+
