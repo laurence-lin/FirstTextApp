@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,8 +85,8 @@ DATABASES = {
     },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'firsttext', # DB name in MySQL
-        'HOST' : '192.168.1.106',
+        'NAME': os.environ.get('MYSQL_DATABASE', 'firsttext') #'firsttext', # DB name in MySQL
+        'HOST' : 'db',
         'PORT' : '3306',
         'USER' : 'admin',
         'PASSWORD' : 'laurence',
