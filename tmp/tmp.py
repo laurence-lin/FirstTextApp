@@ -16,20 +16,25 @@ summary = summarizer(text, max_length=150, min_length=30, do_sample=False)  # Ad
 print(summary[0]['summary_text'])
 '''
 
-def translate_from_model(text, model_name = 'utrobinmv/t5_translate_en_ru_zh_small_1024', device = 'cpu', translation_order = 'translate to zh: '):
-    model = T5ForConditionalGeneration.from_pretrained(model_name) # load model
-    model.to(device)
-    tokenizer = T5Tokenizer.from_pretrained(model_name) # load model tokenizer
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 
-    src_text = translation_order + text
+def translate_text(text, checkpoint = 'facebook/nllb-200-distilled-600M', chunk_size=500, src_lang = 'eng_Latn', target_lang = 'zho_Hans'): # Adjust chunk_size as needed
 
-    input_ids = tokenizer(src_text, return_tensors="pt")
+    model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint)
+    tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+    max_input_length = tokenizer.model_max_length - 2 # Account for start/end tokens with the tokenizer's max length
+    
+    translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang=src_lang, tgt_lang=target_lang, max_length = 400)
+    
+    translated_text = ""
+    for i in range(0, len(text), chunk_size):
+        chunk = text[i:i + chunk_size]
+        chunk_processed = translator(chunk)[0]['translation_text']
 
-    generated_tokens = model.generate(**input_ids.to(device)) # Generate translated result
-
-    result = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True) # Decode translation result
-
-    return result
+        translated_text += chunk_processed
+        
+    
+    return translated_text
 
 
 def translate_long_text(text, chunk_size=500, model_name = 'utrobinmv/t5_translate_en_ru_zh_small_1024', device = 'cpu', translation_order = 'translate to zh: '):  # Adjust chunk_size as needed
@@ -46,10 +51,11 @@ def translate_long_text(text, chunk_size=500, model_name = 'utrobinmv/t5_transla
 
     translated_chunks = []
     for i in range(0, input_ids.shape[1], max_len):
-        print("Working on chunk ", (i+1))
+        print("Working on chunk ", (i // max_len) + 1)
         chunk_input_ids = input_ids[:, i:min(i + max_len, input_ids.shape[1])]
         generated_tokens = model.generate(chunk_input_ids.to(device))
-        translated_chunk = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)[0]
+
+        translated_chunk = tokenizer.decode(generated_tokens[0], skip_special_tokens=True)
         translated_chunks.append(translated_chunk)
 
     return "".join(translated_chunks)  # Combine translated chunks

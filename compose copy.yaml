@@ -2,7 +2,6 @@ version: "3"
 services:
   db:
     image: mysql
-    container_name: mysqldb
     environment: 
       MYSQL_ROOT_PASSWORD: root123
     volumes:
@@ -13,6 +12,7 @@ services:
       - textapp_network
     restart: always
 
+    
   django_app:
     build: .  # Build from the current directory (where Dockerfile is)
     ports:
@@ -22,7 +22,7 @@ services:
     depends_on:
       - db
     environment:
-      - MYSQL_HOST=mysqldb
+      - MYSQL_HOST=db
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=laurence
       - MYSQL_DATABASE=firsttext
@@ -35,8 +35,6 @@ services:
       timeout: 5s
       retries: 5
       start_period: 20s # Allow time for initialisation
-
-
 
   
 

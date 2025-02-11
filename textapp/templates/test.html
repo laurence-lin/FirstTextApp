@@ -1,0 +1,53 @@
+{% load static %}
+<!doctype html>
+<html  dir="ltr" lang="zh-TW">
+  <head >
+    <title>文本應用 APP - 文章摘要</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+<body >
+
+<div class="Muti-grid root">
+    <div class="upper-header-grid">
+        <div class="logo">
+            <a href="/textapp/base">  <img src="{% static 'img/combine_logo.png' %}" alt="My Website Logo">
+            </a>
+        </div>
+        <header class="upper-header-inside">
+            
+        </header>
+    </div>
+
+    <div class="sidebar-and-middle-content">
+        <div class="sidenav">
+            <a href = "/textapp/base">Basic Text process base page</a>
+            <a href = "/textapp/textSummarize" >Text Summarization</a>
+            <a href = "/textapp/textTranslate" >Text Translation</a>
+            <a href = "/textapp/textKeywordExtract" >Get keyword from text</a>
+        </div>
+
+        <div class="content-title" data-v-587ed573="">
+            <h1 class="tools-app__page-title" data-v-587ed573="">文章處理程式</h1>
+            <h2>{% block task_title %}Basic Text Uppercase {% endblock %}</h2>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+{% block script %}
+<script src="{% static 'js/click_base_button.js' %}"></script>
+{% endblock %}
+
+<footer>
+    <div class="footer">
+        <a href="/">  <img src="{% static 'img/logo.png' %}" alt="My Website Logo">
+        </a>
+      </div>
+</footer>
+
+</body>
+</html>

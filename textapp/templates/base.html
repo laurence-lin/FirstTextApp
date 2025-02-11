@@ -4,17 +4,33 @@
   <head >
     <title>文本應用 APP - 文章摘要</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 <body >
 
-<div class="tools-app__head" data-v-587ed573="">
-    <h1 class="tools-app__page-title" data-v-587ed573="">文章處理程式</h1>
-</div>
+<div class="Muti-grid root">
+ <div class="upper-header-grid">
+    <div class="logo">
+        <a href="/textapp/base">  <img src="{% static 'img/combine_logo.png' %}" alt="My Website Logo">
+        </a>
+      </div>
+    <header class="upper-header-inside">
+        This is Header
+    </header>
+ </div>
 
-<a href = "/textapp/base" class="text-switch-button">Basic Text process base page</a>
-<a href = "/textapp/textSummarize" class="text-switch-button">Text Summarization</a>
-<a href = "/textapp/textTranslate" class="text-switch-button">Text Translation</a>
-<a href = "/textapp/textKeywordExtract" class="text-switch-button">Get keyword from text</a>
+ <div class="tools-app__head" data-v-587ed573="">
+    <h1 class="tools-app__page-title" data-v-587ed573="">文章處理程式</h1>
+ </div>
+
+ <div class="sidenav">
+<a href = "/textapp/base">Basic Text process base page</a>
+<a href = "/textapp/textSummarize" >Text Summarization</a>
+<a href = "/textapp/textTranslate" >Text Translation</a>
+<a href = "/textapp/textKeywordExtract" >Get keyword from text</a>
+ </div>
+
+</div>
 
 <h2>{% block task_title %}Basic Text Uppercase {% endblock %}</h2>
 
@@ -22,11 +38,18 @@
     <div class="text-main-content">
             <div class="content-region-top">
                 <div class="content-select_lang" >
-                    <select class="select_lang_toggle" id="select-language">
+                    <select class="select_lang_toggle" id="select-input-language">
+                        Input Language
                         <option value="" selected="selected" disabled="disabled" hidden="hidden">Select a language for text</option> 
                         <option selected="selected" value="english">英文</option>
                         <option value="traditional_chinese" >中文 (繁體)</option>
                     </select> <!---->
+                    <select class="select_lang_toggle" id="select-output-language">
+                        Output Language
+                        <option value="" selected="selected" disabled="disabled" hidden="hidden">Select a language for text</option> 
+                        <option selected="selected" value="english">英文</option>
+                        <option value="traditional_chinese" >中文 (繁體)</option>
+                    </select> 
                 </div> <!---->
             </div> 
             
@@ -84,8 +107,16 @@
     </div>
 </div>
 
+<footer>
+  <div class="logo">
+      <a href="/">  <img src="{% static 'img/logo.png' %}" alt="My Website Logo">
+      </a>
+    </div>
+</footer>
+
 {% block script %}
 <script src="{% static 'js/click_base_button.js' %}"></script>
 {% endblock %}
+
 </body>
 </html>
