@@ -119,7 +119,53 @@ main {
     color: yellow;
   }
 
-  .content-title {
-    flex: 1;
+.content-area {
+    display: flex;
+    /*flex: 1;*/
+    flex-direction: column;
     padding-left: 250px;
+}
+
+  .content-title {
+    /*flex: 1;*/
+    padding-left: 0px;
+    
   }
+
+.content-select_lang {
+    flex: 1;
+    margin-top: 0px;
+}
+
+.text-output-container { /* New container for textEditor and output */
+    display: flex;
+    flex: 1; /* Allow container to grow */
+}
+
+.textEditor textarea {
+    height: 400px;
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.output-text-block {
+    flex: 1; /* Each takes 50% */
+    padding-left: 10px; /* Space between text editor and output */
+    border: 1px solid #ccc; /* Or your preferred styling */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+    box-sizing: border-box;
+}
+
+.output-text-block pre, .output-text-block p {
+    /* Style pre and p elements inside output block as needed */
+    margin: 0; /* Example: remove default margins */
+    padding: 10px; /* Example: add some padding */
+    white-space: pre-wrap; /* Allow text to wrap within <pre> */
+}
+
+.process-text-button {
+    display: flex; /* Enable flexbox for the button container */
+    justify-content: space-between; /* Distribute space between buttons */
+    align-items: center; /* Vertically center items */
+}

@@ -27,9 +27,53 @@
             <a href = "/textapp/textKeywordExtract" >Get keyword from text</a>
         </div>
 
-        <div class="content-title" data-v-587ed573="">
-            <h1 class="tools-app__page-title" data-v-587ed573="">文章處理程式</h1>
-            <h2>{% block task_title %}Basic Text Uppercase {% endblock %}</h2>
+        <div class="content-area">
+            <div class="content-title">
+                <h1 class="tools-app__page-title">文章處理程式</h1>
+                <h2>{% block task_title %}Basic Text Uppercase {% endblock %}</h2>
+            </div>
+            
+            <div class="content-select_lang" >
+                Input text language: 
+                <select class="select_lang_toggle" id="select-input-language">
+                    
+                    <option value="" selected="selected" disabled="disabled" hidden="hidden">Select a language for text</option> 
+                    <option selected="selected" value="english">英文</option>
+                    <option value="traditional_chinese" >中文 (繁體)</option>
+                </select>
+                <div class="output-config">
+                    <label for="input-text-lower-limit">Output text size:</label>
+                    <input type="text" id="input-text-lower-limit" name="lower_limit" required minlength="1" maxlength="8" size="10" />
+                    <span>to</span>
+                    <input type="text" id="input-text-upper-limit" name="upper_limit" required minlength="1" maxlength="8" size="10" />
+                    <span>words</span>
+                </div>
+                
+            </div>
+            
+
+            <div class="text-output-container">  
+                <div class="textEditor">
+                    <textarea id="text-box1" name="text-box1" placeholder="Please input some text..."></textarea>
+                </div>
+                <div class="output-text-block">
+                    <pre id="processed-text"></pre>
+                    <p id="processed-text-p"></p>
+                    
+                    
+                </div>
+            </div>
+
+            <div class="process-press-button" >
+                <button disabled  type="button" class="wBtn primary size--md" id="process-button"> Process text</button> 
+                <button type="button" class="wBtn default size--md" id="clear-button">clear</button> 
+
+                <button type="button" class="wBtn default size--md"> 
+                    Copy
+            </button>
+                
+            </div>
+            
         </div>
 
     </div>
