@@ -53,13 +53,24 @@ def process_text(request):
         try:
             data = json.loads(request.body)
             text = data.get('text')
+
+            print("Full body: ", request.META)
+            # Get the client's IP address
+            x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+            if x_forwarded_for:
+                ip = x_forwarded_for.split(',')[0]  # Use the first IP in the list
+            else:
+                ip = request.META.get('REMOTE_ADDR')
+
+            print(f"Client IP Address: {ip}")  # Log the IP address
+
             # Perform your text processing logic here (e.g., summarization)
             processed_text = text_processing(text) # Example: Convert to uppercase
 
             print("Data: ", data, ' text: ', text)
             print("Processed_test: ", processed_text)
 
-            format_data = {'originText':text, 'inferenceText':str(processed_text), 'task_type':'Normal'}
+            format_data = {'originText':text, 'inferenceText':str(processed_text), 'task_type':'Normal', 'user_ip': ip}
             print("Format data: ", format_data)
 
             # Store inference and source to DB
@@ -83,13 +94,20 @@ def nlp_text_summarize(request):
         try:
             data = json.loads(request.body)
             text = data.get('text')
+
+            x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+            if x_forwarded_for:
+                ip = x_forwarded_for.split(',')[0]  # Use the first IP in the list
+            else:
+                ip = request.META.get('REMOTE_ADDR')
+
             # Perform your text processing logic here (e.g., summarization)
             processed_text = text_summarizing(text) # Example: Convert to uppercase
 
             print("Data: ", data, ' text: ', text)
             print("Processed_test: ", processed_text)
 
-            format_data = {'originText':text, 'inferenceText':str(processed_text), 'task_type':'Summarization'}
+            format_data = {'originText':text, 'inferenceText':str(processed_text), 'task_type':'Summarization', 'user_ip': ip}
             print("Format data: ", format_data)
 
             # Store inference and source to DB
@@ -135,6 +153,13 @@ def nlp_text_translate(request):
         try:
             data = json.loads(request.body)
             text = data.get('text')
+
+            x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+            if x_forwarded_for:
+                ip = x_forwarded_for.split(',')[0]  # Use the first IP in the list
+            else:
+                ip = request.META.get('REMOTE_ADDR')
+
             # Perform your text processing logic here (e.g., summarization)
             processed_text = text_translate(text,
                                             checkpoint=model,
@@ -144,7 +169,7 @@ def nlp_text_translate(request):
             print("Data: ", data, ' text: ', text)
             print("Processed_test: ", processed_text)
 
-            format_data = {'originText':text, 'inferenceText':str(processed_text), 'task_type':'Summarization'}
+            format_data = {'originText':text, 'inferenceText':str(processed_text), 'task_type':'Translation', 'user_ip':ip}
             print("Format data: ", format_data)
 
             # Store inference and source to DB

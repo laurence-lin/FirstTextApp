@@ -69,6 +69,7 @@ main {
 .upper-header-grid {
     width: 100%;
     top: 0;
+    position: fixed;
 }
 
 .Muti-grid.root {
@@ -143,7 +144,7 @@ main {
 }
 
 .textEditor textarea {
-    height: 400px;
+    height: 80%;
     width: 100%;
     box-sizing: border-box;
     resize: vertical;
