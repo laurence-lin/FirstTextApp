@@ -10,6 +10,7 @@ torch = "*"
 torchvision = "*" 
 torchaudio = "*"
 sentencepiece = "*"
+fasttext = "*"
 
 [dev-packages]
 

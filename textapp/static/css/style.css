@@ -1,4 +1,17 @@
 /* styles.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
 .input-row {
     display: flex;
     align-items: center;
@@ -52,20 +65,108 @@
     box-sizing: border-box;
 }
 
-/* In your CSS file or within <style> tags */
-.text-switch-button {
-    display: inline-block; /* Makes the link behave like a block element */
-    padding: 10px 20px; /* Adjust padding as needed */
-    font-size: 16px; /* Adjust font size */
-    text-decoration: none; /* Remove underline from link */
-    background-color: #4CAF50; /* Set background color */
-    color: white; /* Set text color */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Add rounded corners */
-    cursor: pointer; /* Make cursor a pointer on hover */
-    transition: background-color 0.3s ease; /* Add a transition for hover effect */
+/* Top logo bar */
+.upper-header-grid {
+    width: 100%;
+    top: 0;
+    position: fixed;
 }
 
-.text-switch-button:hover {
-    background-color: #45a049; /* Darker background color on hover */
+.Muti-grid.root {
+    display: flex; /* Enable flexbox on the root grid container */
+    flex-direction: column; /* Arrange items vertically */
+    flex: 1; /* Allow the grid to take up available space */
+}
+
+.footer {
+    /*position: fixed;*/
+    display: flex;
+    width: 100%;
+    background-color: gray;
+    color: white;
+    text-align: center;
+    position: relative;
+    padding-left: 50px;
+    padding-bottom: 30px;
+  }
+
+.sidebar-and-middle-content {
+    display: flex;
+    flex: 1;
+}
+
+/* The sidebar menu */
+.sidenav {
+    display: flex;
+    flex-direction: column;
+    width: 200px; /* Set the width of the sidebar */
+    left: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white; 
+    display: block;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: yellow;
+  }
+
+.content-area {
+    display: flex;
+    /*flex: 1;*/
+    flex-direction: column;
+    padding-left: 250px;
+}
+
+  .content-title {
+    /*flex: 1;*/
+    padding-left: 0px;
+    
+  }
+
+.content-select_lang {
+    flex: 1;
+    margin-top: 0px;
+}
+
+.text-output-container { /* New container for textEditor and output */
+    display: flex;
+    flex: 1; /* Allow container to grow */
+}
+
+.textEditor textarea {
+    height: 80%;
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.output-text-block {
+    flex: 1; /* Each takes 50% */
+    padding-left: 10px; /* Space between text editor and output */
+    border: 1px solid #ccc; /* Or your preferred styling */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+    box-sizing: border-box;
+}
+
+.output-text-block pre, .output-text-block p {
+    /* Style pre and p elements inside output block as needed */
+    margin: 0; /* Example: remove default margins */
+    padding: 10px; /* Example: add some padding */
+    white-space: pre-wrap; /* Allow text to wrap within <pre> */
+}
+
+.process-text-button {
+    display: flex; /* Enable flexbox for the button container */
+    justify-content: space-between; /* Distribute space between buttons */
+    align-items: center; /* Vertically center items */
 }

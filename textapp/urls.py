@@ -15,6 +15,8 @@ urlpatterns = [
     path('sample/', views.sample),
     path('processText/', views.process_text),
     path('processTextSummarize/', views.nlp_text_summarize),
+    path('processTextTranslate/', views.nlp_text_translate),
+    path('test/', views.test),
 ]
 
 

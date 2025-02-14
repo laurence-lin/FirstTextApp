@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() { // Ensure DOM is full
     processButton.addEventListener('click', function() {
         const text = textarea.value.trim();  // Remove additional whitespace
         if (text !== '') {
-            fetch('/textapp/processText/', {
+            fetch('/textapp/processTextTranslate/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
